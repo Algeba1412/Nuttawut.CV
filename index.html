@@ -34,23 +34,12 @@
             padding: 0 20px;
         }
 
-        /* --- ระบบสลับภาษา (Language Switcher Logic) --- */
-        /* ค่าเริ่มต้น: ซ่อนภาษาไทยไว้ก่อน เพื่อแสดงภาษาอังกฤษ หรือสลับตามปุ่ม */
-        [lang="th"] { display: none; }
-        
-        body.lang-th [lang="th"] { display: inline; }
-        body.lang-th blockquote[lang="th"], 
-        body.lang-th div[lang="th"], 
-        body.lang-th section[lang="th"],
-        body.lang-th ul[lang="th"],
-        body.lang-th p[lang="th"],
-        body.lang-th h1[lang="th"],
-        body.lang-th h2[lang="th"],
-        body.lang-th h3[lang="th"],
-        body.lang-th h4[lang="th"],
-        body.lang-th span[lang="th"],
-        body.lang-th a[lang="th"] { display: block; }
-        
+      /* --- ระบบสลับภาษา (Language Switcher) --- */
+        [lang="th"] { display: none !important; }
+        [lang="en"] { display: inline-flex !important; }
+
+        /* เมื่อเปิดใช้งานภาษาไทย */
+        body.lang-th [lang="th"] { display: inline-flex !important; }
         body.lang-th [lang="en"] { display: none !important; }
 
         /* --- Header / Navigation --- */
