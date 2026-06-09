@@ -28,19 +28,29 @@
             scroll-behavior: smooth;
         }
 
-       .container {
+        /* จัดโครงสร้างของ Container หน้าเว็บให้อยู่กึ่งกลางหน้าจอทุกจอคอม */
+        .container {
             max-width: 1100px;
-            margin: 0 auto; /* จัดโครงสร้างให้อยู่กึ่งกลางหน้าจออัตโนมัติ */
+            margin: 0 auto !important; 
             padding: 0 20px;
+            width: 100%;
         }
 
-      /* --- ระบบสลับภาษา (Language Switcher) --- */
+        /* --- ระบบสลับภาษา (Language Switcher) --- */
         [lang="th"] { display: none !important; }
         [lang="en"] { display: inline-flex !important; }
 
         /* เมื่อเปิดใช้งานภาษาไทย */
         body.lang-th [lang="th"] { display: inline-flex !important; }
         body.lang-th [lang="en"] { display: none !important; }
+
+        /* ปรับแต่งสำหรับแท็กข้อความทั่วไปที่เป็น Block */
+        body.lang-th h1[lang="th"],
+        body.lang-th h2[lang="th"],
+        body.lang-th p[lang="th"],
+        body.lang-th ul[lang="th"] {
+            display: block !important;
+        }
 
         /* --- Header / Navigation --- */
         header {
@@ -49,6 +59,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         nav {
@@ -111,6 +122,11 @@
         }
 
         /* --- Hero Section --- */
+        .hero-section {
+            width: 100%;
+            background-color: var(--light-bg);
+        }
+
         .hero {
             padding: 90px 0;
             display: flex;
@@ -203,6 +219,7 @@
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
             overflow: hidden;
             border: 4px solid white;
+            flex-shrink: 0;
         }
 
         .hero-img img {
@@ -214,6 +231,7 @@
         /* --- Section Common --- */
         section {
             padding: 80px 0;
+            width: 100%;
         }
 
         .section-title {
@@ -316,6 +334,7 @@
             color: #94a3b8;
             padding: 50px 0;
             font-size: 14px;
+            width: 100%;
         }
 
         .footer-content {
@@ -351,63 +370,65 @@
 <body>
 
     <header>
-        <div class="container nav">
-            <a href="#" class="logo">Nattawut.IT</a>
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li>
-                        <a href="#about" lang="en">About Me</a>
-                        <a href="#about" lang="th">เกี่ยวกับฉัน</a>
-                    </li>
-                    <li>
-                        <a href="#skills" lang="en">Skills</a>
-                        <a href="#skills" lang="th">ทักษะความสามารถ</a>
-                    </li>
-                    <li>
-                        <a href="#experience" lang="en">Experience</a>
-                        <a href="#experience" lang="th">ประสบการณ์ทำงาน</a>
-                    </li>
-                    <li>
-                        <a href="#contact" lang="en">Contact</a>
-                        <a href="#contact" lang="th">ติดต่อ</a>
-                    </li>
-                </ul>
-                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">TH</button>
-            </div>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Nattawut.IT</a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li>
+                            <a href="#about" lang="en">About Me</a>
+                            <a href="#about" lang="th">เกี่ยวกับฉัน</a>
+                        </li>
+                        <li>
+                            <a href="#skills" lang="en">Skills</a>
+                            <a href="#skills" lang="th">ทักษะความสามารถ</a>
+                        </li>
+                        <li>
+                            <a href="#experience" lang="en">Experience</a>
+                            <a href="#experience" lang="th">ประสบการณ์ทำงาน</a>
+                        </li>
+                        <li>
+                            <a href="#contact" lang="en">Contact</a>
+                            <a href="#contact" lang="th">ติดต่อ</a>
+                        </li>
+                    </ul>
+                    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">TH</button>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <section class="container hero" id="about">
-        <div class="hero-text">
-            <div class="badge-container">
-                <span class="cert-badge">🛡️ Certified: ITIL 4 Foundation</span>
-            </div>
-            
-            <h1 lang="en">Hi, I'm Nattawut Arinyaput</h1>
-            <h1 lang="th">สวัสดีครับ, ผม ณัฐวุฒิ อริญญาพัชร์</h1>
-            
-            <h2>Associate IT Technical Support Engineer</h2>
-            
-            <p lang="en">
-                An experienced IT Technical Support Engineer specializing in core IT infrastructure maintenance, cloud-managed networking, and hardware/software troubleshooting. Dedicated to implementing international tech standards like ITIL 4 to drive operational efficiency.
-            </p>
-            <p lang="th">
-                วิศวกรซัพพอร์ตไอทีที่มีความเชี่ยวชาญด้านการดูแลระบบโครงสร้างพื้นฐานไอที (IT Infrastructure), ระบบเน็ตเวิร์ก และการแก้ไขปัญหา Hardware/Software มีประสบการณ์ตรงในการดูแลระบบภายในองค์กรขนาดใหญ่ และมุ่งมั่นที่จะนำมาตรฐานเทคโนโลยีระดับสากลมาพัฒนาองค์กรอย่างต่อเนื่องครับ
-            </p>
-            
-            <div class="cta-buttons">
-                <!-- เวอร์ชันภาษาอังกฤษ (แสดงเฉพาะตอนเลือก EN) -->
-                <a href="#contact" class="btn" lang="en">📩 Contact Me</a>
-                <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="en">📄 Download CV (PDF)</a>
+    <section class="hero-section" id="about">
+        <div class="container hero">
+            <div class="hero-text">
+                <div class="badge-container">
+                    <span class="cert-badge">🛡️ Certified: ITIL 4 Foundation</span>
+                </div>
                 
-                <!-- เวอร์ชันภาษาไทย (แสดงเฉพาะตอนเลือก TH) -->
-                <a href="#contact" class="btn" lang="th">📩 ติดต่อฉัน</a>
-                <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="th">📄 ดาวน์โหลด CV (PDF)</a>
+                <h1 lang="en">Hi, I'm Nattawut Arinyaput</h1>
+                <h1 lang="th">สวัสดีครับ, ผม ณัฐวุฒิ อริญญาพัชร์</h1>
+                
+                <h2>Associate IT Technical Support Engineer</h2>
+                
+                <p lang="en">
+                    An experienced IT Technical Support Engineer specializing in core IT infrastructure maintenance, cloud-managed networking, and hardware/software troubleshooting. Dedicated to implementing international tech standards like ITIL 4 to drive operational efficiency.
+                </p>
+                <p lang="th">
+                    วิศวกรซัพพอร์ตไอทีที่มีความเชี่ยวชาญด้านการดูแลระบบโครงสร้างพื้นฐานไอที (IT Infrastructure), ระบบเน็ตเวิร์ก และการแก้ไขปัญหา Hardware/Software มีประสบการณ์ตรงในการดูแลระบบภายในองค์กรขนาดใหญ่ และมุ่งมั่นที่จะนำมาตรฐานเทคโนโลยีระดับสากลมาพัฒนาองค์กรอย่างต่อเนื่องครับ
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn" lang="en">📩 Contact Me</a>
+                    <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="en">📄 Download CV (PDF)</a>
+                    
+                    <a href="#contact" class="btn" lang="th">📩 ติดต่อฉัน</a>
+                    <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="th">📄 ดาวน์โหลด CV (PDF)</a>
+                </div>
             </div>
-        </div>
-        
-        <div class="hero-img">
-            <img src="https://via.placeholder.com/260" alt="Nattawut Arinyaput">
+            
+            <div class="hero-img">
+                <img src="https://via.placeholder.com/260" alt="Nattawut Arinyaput">
+            </div>
         </div>
     </section>
 
@@ -447,7 +468,6 @@
             <h2 class="section-title" lang="th">ประสบการณ์การทำงาน</h2>
             
             <div class="timeline">
-
                 <div class="timeline-item">
                     <div class="timeline-date" lang="en">October 2022 - Present</div>
                     <div class="timeline-date" lang="th">ตุลาคม 2022 - ปัจจุบัน</div>
@@ -512,7 +532,6 @@
                         <li>ตรวจสอบคุณภาพและความสมบูรณ์ของตู้สินค้า (Containers QC & QA) เพื่อความถูกต้องก่อนส่งมอบให้ลูกค้า</li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </section>
@@ -539,13 +558,10 @@
             const body = document.body;
             const btn = document.getElementById('langBtn');
             
-            // เช็คว่าปัจจุบันเป็นภาษาไทยอยู่หรือไม่
             if (body.classList.contains('lang-th')) {
-                // เปลี่ยนเป็นภาษาอังกฤษ
                 body.classList.remove('lang-th');
                 btn.innerText = 'TH';
             } else {
-                // เปลี่ยนเป็นภาษาไทย
                 body.classList.add('lang-th');
                 btn.innerText = 'EN';
             }
