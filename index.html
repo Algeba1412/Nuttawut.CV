@@ -26,25 +26,30 @@
             color: #334155;
             line-height: 1.6;
             scroll-behavior: smooth;
-        }
-
-        /* จัดโครงสร้างของ Container หน้าเว็บให้อยู่กึ่งกลางหน้าจอทุกจอคอม */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto !important; 
-            padding: 0 20px;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* บังคับโครงสร้างหลักทุกส่วนเข้ากึ่งกลางหน้าจอ */
         }
 
-        /* --- ระบบสลับภาษา (Language Switcher) --- */
+        /* --- โครงสร้าง Container หลัก (จัดกึ่งกลาง) --- */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- ระบบสลับภาษา (Fixed Syntax) --- */
         [lang="th"] { display: none !important; }
         [lang="en"] { display: inline-flex !important; }
 
-        /* เมื่อเปิดใช้งานภาษาไทย */
+        /* ลบช่องว่างออกเพื่อให้ CSS เช็คเงื่อนไขที่เกิดร่วมกับ Body ได้ถูกต้อง */
         body.lang-th [lang="th"] { display: inline-flex !important; }
         body.lang-th [lang="en"] { display: none !important; }
 
-        /* ปรับแต่งสำหรับแท็กข้อความทั่วไปที่เป็น Block */
         body.lang-th h1[lang="th"],
         body.lang-th h2[lang="th"],
         body.lang-th p[lang="th"],
@@ -67,6 +72,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 18px 0;
+            width: 100%;
         }
 
         .logo {
@@ -103,7 +109,6 @@
             color: var(--secondary-color);
         }
 
-        /* ปุ่มสลับภาษา (Lang Button) */
         .lang-btn {
             background-color: #e2e8f0;
             color: var(--dark-color);
@@ -125,14 +130,20 @@
         .hero-section {
             width: 100%;
             background-color: var(--light-bg);
+            display: flex;
+            justify-content: center;
         }
 
         .hero {
-            padding: 90px 0;
+            padding: 90px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
         }
 
         .hero-text h1 {
@@ -173,7 +184,6 @@
             gap: 6px;
         }
 
-        /* --- Group Buttons --- */
         .cta-buttons {
             display: flex;
             gap: 15px;
@@ -232,6 +242,8 @@
         section {
             padding: 80px 0;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .section-title {
@@ -239,6 +251,7 @@
             color: var(--dark-color);
             margin-bottom: 40px;
             position: relative;
+            width: 100%;
         }
 
         .section-title::after {
@@ -260,6 +273,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
+            width: 100%;
         }
 
         .skill-card {
@@ -285,6 +299,7 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .timeline-item {
@@ -335,6 +350,8 @@
             padding: 50px 0;
             font-size: 14px;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .footer-content {
@@ -343,6 +360,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+            width: 100%;
         }
 
         .contact-info p {
@@ -357,7 +375,7 @@
             .hero {
                 flex-direction: column-reverse;
                 text-align: center;
-                padding: 50px 0;
+                padding: 50px 20px;
                 gap: 30px;
             }
             .hero-text h1 { font-size: 32px; }
@@ -536,7 +554,7 @@
         </div>
     </section>
 
-    <footer id="contact">
+    <footer>
         <div class="container footer-content">
             <div class="contact-info">
                 <h3 lang="en" style="color: white; margin-bottom: 15px;">Contact Information</h3>
