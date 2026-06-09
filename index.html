@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nattawut Arinyaput | IT Support Engineer Portfolio</title>
+    <style>
+        /* --- Base & Theme Setup --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a; /* Deep Tech Blue */
+            --secondary-color: #3b82f6; /* Accent Blue */
+            --dark-color: #0f172a; /* Slate Dark */
+            --light-bg: #f8fafc; /* Soft Light Gray */
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: #334155;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- ระบบสลับภาษา (Language Switcher Logic) --- */
+        /* ค่าเริ่มต้น: ซ่อนภาษาไทยไว้ก่อน เพื่อแสดงภาษาอังกฤษ หรือสลับตามปุ่ม */
+        [lang="th"] { display: none; }
+        
+        body.lang-th [lang="th"] { display: inline; }
+        body.lang-th blockquote[lang="th"], 
+        body.lang-th div[lang="th"], 
+        body.lang-th section[lang="th"],
+        body.lang-th ul[lang="th"],
+        body.lang-th p[lang="th"],
+        body.lang-th h1[lang="th"],
+        body.lang-th h2[lang="th"],
+        body.lang-th h3[lang="th"],
+        body.lang-th h4[lang="th"],
+        body.lang-th span[lang="th"],
+        body.lang-th a[lang="th"] { display: block; }
+        
+        body.lang-th [lang="en"] { display: none !important; }
+
+        /* --- Header / Navigation --- */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ปุ่มสลับภาษา (Lang Button) */
+        .lang-btn {
+            background-color: #e2e8f0;
+            color: var(--dark-color);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 90px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 44px;
+            color: var(--dark-color);
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .hero-text h2 {
+            font-size: 22px;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 550px;
+        }
+
+        .badge-container {
+            margin-bottom: 25px;
+        }
+
+        .cert-badge {
+            background-color: #ecfdf5;
+            color: #059669;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #a7f3d0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- Group Buttons --- */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #172554;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+        }
+
+        .hero-img {
+            width: 260px;
+            height: 260px;
+            border-radius: 20%;
+            background-color: #cbd5e1;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 4px solid white;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Section Common --- */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--dark-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        /* --- Skills & Abilities --- */
+        .skills-bg {
+            background-color: #ffffff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .skill-card h4 {
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .skill-card p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        /* --- Work Experience (Timeline) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+
+        .timeline-company {
+            font-size: 14px;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .timeline-scope {
+            list-style-type: square;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .timeline-scope li {
+            margin-bottom: 6px;
+        }
+
+        /* --- Footer / Contact --- */
+        footer {
+            background-color: var(--dark-color);
+            color: #94a3b8;
+            padding: 50px 0;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 50px 0;
+                gap: 30px;
+            }
+            .hero-text h1 { font-size: 32px; }
+            .cta-buttons { justify-content: center; }
+            .nav-links { display: none; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav">
+            <a href="#" class="logo">Nattawut.IT</a>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li>
+                        <a href="#about" lang="en">About Me</a>
+                        <a href="#about" lang="th">เกี่ยวกับฉัน</a>
+                    </li>
+                    <li>
+                        <a href="#skills" lang="en">Skills</a>
+                        <a href="#skills" lang="th">ทักษะความสามารถ</a>
+                    </li>
+                    <li>
+                        <a href="#experience" lang="en">Experience</a>
+                        <a href="#experience" lang="th">ประสบการณ์ทำงาน</a>
+                    </li>
+                    <li>
+                        <a href="#contact" lang="en">Contact</a>
+                        <a href="#contact" lang="th">ติดต่อ</a>
+                    </li>
+                </ul>
+                <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">TH</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="container hero" id="about">
+        <div class="hero-text">
+            <div class="badge-container">
+                <span class="cert-badge">🛡️ Certified: ITIL 4 Foundation</span>
+            </div>
+            
+            <h1 lang="en">Hi, I'm Nattawut Arinyaput</h1>
+            <h1 lang="th">สวัสดีครับ, ผม ณัฐวุฒิ อริญญาพัชร์</h1>
+            
+            <h2>Associate IT Technical Support Engineer</h2>
+            
+            <p lang="en">
+                An experienced IT Technical Support Engineer specializing in core IT infrastructure maintenance, cloud-managed networking, and hardware/software troubleshooting. Dedicated to implementing international tech standards like ITIL 4 to drive operational efficiency.
+            </p>
+            <p lang="th">
+                วิศวกรซัพพอร์ตไอทีที่มีความเชี่ยวชาญด้านการดูแลระบบโครงสร้างพื้นฐานไอที (IT Infrastructure), ระบบเน็ตเวิร์ก และการแก้ไขปัญหา Hardware/Software มีประสบการณ์ตรงในการดูแลระบบภายในองค์กรขนาดใหญ่ และมุ่งมั่นที่จะนำมาตรฐานเทคโนโลยีระดับสากลมาพัฒนาองค์กรอย่างต่อเนื่องครับ
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="#contact" class="btn" lang="en">📩 Contact Me</a>
+                <a href="#contact" class="btn" lang="th">📩 ติดต่อฉัน</a>
+                
+                <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="en">📄 Download CV (PDF)</a>
+                <a href="CV_Nattawut_Arinyaput.pdf" download class="btn btn-secondary" lang="th">📄 ดาวน์โหลด CV (PDF)</a>
+            </div>
+        </div>
+        
+        <div class="hero-img">
+            <img src="https://via.placeholder.com/260" alt="Nattawut Arinyaput">
+        </div>
+    </section>
+
+    <section class="skills-bg" id="skills">
+        <div class="container">
+            <h2 class="section-title" lang="en">Skills & Core Competencies</h2>
+            <h2 class="section-title" lang="th">ทักษะและความเชี่ยวชาญ</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>Network & Infrastructure</h4>
+                    <p lang="en">Cisco Meraki, Network Switches, VLAN configuration, Configuration & IT Infrastructure Maintenance.</p>
+                    <p lang="th">ดูแลจัดการระบบ Cisco Meraki, การตั้งค่า Network Switches และ VLAN รวมถึงการซ่อมบำรุงโครงสร้างเน็ตเวิร์กพื้นฐานทั้งหมด</p>
+                </div>
+                <div class="skill-card">
+                    <h4>ITIL & Service Management</h4>
+                    <p lang="en">ITIL 4 Certified, ServiceNow platform for incident logging, ticket tracking & prioritization.</p>
+                    <p lang="th">ได้รับใบเซอร์ ITIL 4 มุ่งเน้นการทำงานเป็นระบบสากล และใช้งานระบบ ServiceNow ในการบริหารคิวตั๋วปัญหาและเคสเร่งด่วน</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Security & Surveillance</h4>
+                    <p lang="en">CCTV Surveillance (Network & storage management), Door Access Control Systems.</p>
+                    <p lang="th">บริหารจัดการระบบกล้องวงจรปิด CCTV (การเชื่อมต่อเน็ตเวิร์กและการเก็บข้อมูลสำรอง) และระบบเข้าออกประตูอัจฉริยะ</p>
+                </div>
+                <div class="skill-card">
+                    <h4>Hardware & Software Support</h4>
+                    <p lang="en">PC, Laptops, Printers, OS patching, Drivers setup, Troubleshooting & Program installer.</p>
+                    <p lang="th">ซ่อมบำรุง PC, Laptop, Printer ติดตั้งไดรเวอร์ ทำ OS patching เพื่อความปลอดภัย และแก้ปัญหาโปรแกรมขัดข้องต่างๆ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" lang="en">Work Experience</h2>
+            <h2 class="section-title" lang="th">ประสบการณ์การทำงาน</h2>
+            
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-date" lang="en">October 2022 - Present</div>
+                    <div class="timeline-date" lang="th">ตุลาคม 2022 - ปัจจุบัน</div>
+                    <div class="timeline-title">Associate IT Technical Support Engineer</div>
+                    <div class="timeline-company">NTT (Limited) Thailand</div>
+                    
+                    <ul class="timeline-scope" lang="en">
+                        <li>Provide hands-on support and maintenance for core IT infrastructure systems including Door Access Control and CCTV Surveillance.</li>
+                        <li>Utilize Cisco Meraki cloud-managed solutions for network monitoring, troubleshooting, and centralized configuration.</li>
+                        <li>Manage and track IT support tickets using ServiceNow, focusing on incident logging and prioritization.</li>
+                        <li>Configure VLANs, monitor network traffic, perform firmware upgrades, and coordinate with external vendors or ISPs.</li>
+                    </ul>
+                    <ul class="timeline-scope" lang="th">
+                        <li>ดูแลและซ่อมบำรุงระบบโครงสร้างไอทีพื้นฐานหลัก (Core IT Infrastructure) ได้แก่ ระบบควบคุมการเข้าออกประตู (Access Control), ระบบกล้องวงจรปิด CCTV และเสถียรภาพของระบบอินเทอร์เน็ต</li>
+                        <li>บริหารจัดการและมอนิเตอร์ระบบเครือข่ายเน็ตเวิร์ก (Network Switches & VLANs) ผ่านระบบคลาวด์ <strong>Cisco Meraki</strong></li>
+                        <li>ใช้งานแพลตฟอร์ม <strong>ServiceNow</strong> ในการจัดการ จัดลำดับความสำคัญ และติดตามตั๋วแจ้งปัญหาไอที (IT Support Tickets)</li>
+                        <li>ประสานงานร่วมกับซัพพลายเออร์และผู้ให้บริการภายนอก ในการติดตั้งอุปกรณ์ อัปเกรด และแก้ไขปัญหาเชิงลึก</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2019 - 2022</div>
+                    <div class="timeline-title">IT Support</div>
+                    <div class="timeline-company">TDRI (Thailand Development Research Institute)</div>
+                    
+                    <ul class="timeline-scope" lang="en">
+                        <li>Maintained and repaired hardware and peripherals including Personal Computers, Laptops, Printers, Scanners.</li>
+                        <li>Managed network connectivity to servers and shared network resources; verified port/cable connectivity using LAN Testers.</li>
+                        <li>Applied OS patches, program updates, driver setups, and performed regular system log verifications and disk maintenance.</li>
+                    </ul>
+                    <ul class="timeline-scope" lang="th">
+                        <li>ดูแลบำรุงรักษาอุปกรณ์ฮาร์ดแวร์และอุปกรณ์ต่อพ่วงทั้งหมด เช่น คอมพิวเตอร์พกพา, พรินเตอร์, สแกนเนอร์</li>
+                        <li>จัดการระบบเชื่อมต่อเครือข่ายไปยัง Server และเครื่องพิมพ์ส่วนกลาง พร้อมตรวจสอบสายและพอร์ตเชื่อมต่อด้วย LAN Tester</li>
+                        <li>จัดการด้าน Software อัปเดตไดรเวอร์, ทำระบบความปลอดภัย OS Patches และแก้ไขข้อผิดพลาดระบบ Disk (Scandisk & Defragmentation)</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2014 - 2015</div>
+                    <div class="timeline-title">IT Support (On-site Services)</div>
+                    <div class="timeline-company">Central IT</div>
+                    
+                    <ul class="timeline-scope" lang="en">
+                        <li>Maintained user hardware, laptops, and peripheral systems upon service requests.</li>
+                        <li>Maintained CCTV systems, performed software/driver installation, and solved general connectivity problems.</li>
+                    </ul>
+                    <ul class="timeline-scope" lang="th">
+                        <li>ให้บริการดูแลและซ่อมแซมคอมพิวเตอร์และแล็ปท็อปตามหน้างาน (On-site) เมื่อผู้ใช้งานส่งคำร้องเรียน</li>
+                        <li>ติดตั้งและดูแลระบบ CCTV รวมถึงแก้ไขปัญหาด้านโปรแกรมและฮาร์ดแวร์เบื้องต้นของระบบออฟฟิศ</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2011 - 2012</div>
+                    <div class="timeline-title">QC / QA (Survey Operations)</div>
+                    <div class="timeline-company">KRC Services & Transports</div>
+                    
+                    <ul class="timeline-scope" lang="en">
+                        <li>Inspected shipping containers for damage and cleanliness to ensure completeness before customer delivery.</li>
+                    </ul>
+                    <ul class="timeline-scope" lang="th">
+                        <li>ตรวจสอบคุณภาพและความสมบูรณ์ของตู้สินค้า (Containers QC & QA) เพื่อความถูกต้องก่อนส่งมอบให้ลูกค้า</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="contact-info">
+                <h3 lang="en" style="color: white; margin-bottom: 15px;">Contact Information</h3>
+                <h3 lang="th" style="color: white; margin-bottom: 15px;">ช่องทางการติดต่อ</h3>
+                
+                <p>📍 <strong lang="en">Address:</strong><strong lang="th">ที่อยู่:</strong> 1/11 Park Condo Ramintra 47, Talaeng, Bangkhen, Bangkok 10220</p>
+                <p>📧 <strong lang="en">Email:</strong><strong lang="th">อีเมล:</strong> nuttawutarin_b@hotmail.com</p>
+                <p>📞 <strong lang="en">Phone:</strong><strong lang="th">เบอร์โทรศัพท์:</strong> +66 (0) 86 142 8525</p>
+            </div>
+            <div style="text-align: right;">
+                <p>&copy; 2026 Nattawut Arinyaput. All Rights Reserved.</p>
+                <p style="font-size: 12px; color: #64748b; margin-top: 5px;">Designed for IT Professional Portfolio</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('langBtn');
+            
+            // เช็คว่าปัจจุบันเป็นภาษาไทยอยู่หรือไม่
+            if (body.classList.contains('lang-th')) {
+                // เปลี่ยนเป็นภาษาอังกฤษ
+                body.classList.remove('lang-th');
+                btn.innerText = 'TH';
+            } else {
+                // เปลี่ยนเป็นภาษาไทย
+                body.classList.add('lang-th');
+                btn.innerText = 'EN';
+            }
+        }
+    </script>
+
+</body>
+</html>
